@@ -7,12 +7,12 @@ For container interaction
 
 - Choose your preference to pull the container from Singularity Hub (once)
 ```sh
-singularity pull shub://arafathnihar/fastai-singularity
+singularity pull fastai.sif shub://arafathnihar/fastai-singularity
 ```
 
 - Then interact with it
 ```sh
-singularity shell --nv fastai-singularity.sif
+singularity shell --nv fastai.sif
 ```
 - Creating a virtual environment
 ```sh
