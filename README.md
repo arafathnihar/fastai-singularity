@@ -12,23 +12,5 @@ singularity pull fastai.sif shub://arafathnihar/fastai-singularity
 
 - Then interact with it
 ```sh
-singularity shell --nv fastai.sif
-```
-- Creating a virtual environment
-```sh
-python -m venv env
-source env/bin/activate
-```
-- Installing fastai packages
-```sh
-pip install fastai jupyter notebook jupyter_contrib_nbextensions
-```
-- Cloning fastai-v3 course
-```sh
-git clone https://github.com/fastai/course-v3.git
-```
-- start jupyter notebook
-```sh
-cd course-v3/nbs/dl1/
-jupyter notebook
+singularity run --nv fastai.sif
 ```

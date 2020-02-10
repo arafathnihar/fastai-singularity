@@ -2,21 +2,22 @@ Bootstrap: docker
 From: nvidia/cuda:10.2-base-ubuntu18.04
 
 %post
-    apt-get -qq -y update
-    apt-get install --no-install-recommends -y libjpeg-dev zip unzip libpng-dev libopenmpi-dev python3.8 python3.8-dev python3.8-venv python3-pip
-    cp /usr/bin/python3.8 /usr/bin/python
-    cp /usr/bin/pip3 /usr/bin/pip
-    apt-get -qq -y autoremove
-    apt-get -qq -y autoclean
+    apt-get update -y
+    apt-get upgrade -y
+    apt-get dist-upgrade -y
+    apt-get install -y --no-install-recommends git gcc python3 python3-dev python3-setuptools python3-wheel python3-pip 
+    pip3 install fastai jupyter notebook jupyter_contrib_nbextensions
 
-%labels
-    Author arafathnihar@gmail.com
-    Version v0.0.1
+%runscript
+    FOLDER="course-v3"
+    URL="https://github.com/fastai/course-v3.git"
+    if [ ! -d "$FOLDER" ] ; then
+        git clone $URL $FOLDER
+    fi
+    cd course-v3/nbs
+    jupyter notebook --no-browser --ip=$(hostname -i) --port=9999
 
 %help
     Please follow the steps :
-		sudo singularity build fastai.sif fastai.def
-		singularity shell --nv fastai.sif
-		python -m venv env
-		source env/bin/activate
-		pip install fastai jupyter notebook jupyter_contrib_nbextensions
+        sudo singularity build fastai.sif fastai.def
+        singularity run --nv fastai.sif
